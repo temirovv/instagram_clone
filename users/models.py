@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from shared.models import BaseModel
+
 
 ORDINARY_USER, MANAGER, ADMIN = ("ordinary_user", "manager", "admin")
 VIA_EMAIL, VIA_PHONE = ("via_email", "via_phone")
 NEW, CODE_VERIFIED, DONE, PHOTO_STEP = ("new", "code_verified", "done", "photo_step")
 
-class User(AbstractUser):
+class User(AbstractUser, BaseModel):
     USER_ROLES = (
         (ORDINARY_USER, ORDINARY_USER),
         (MANAGER, MANAGER),
@@ -30,3 +32,6 @@ class User(AbstractUser):
     email = models.EmailField(null=True, blank=True, unique=True)
     phone_number = models.CharField(max_length=35, null=True, blank=True, unique=True)
     photo = models.ImageField(upload_to="user_photos/", null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.username
