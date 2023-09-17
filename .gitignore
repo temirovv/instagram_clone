@@ -1,1 +1,3 @@
 .env
+users/migrations/0001_initial.py
+users/migrations/0002_rename_auth_status_user_auth_status_and_more.py
